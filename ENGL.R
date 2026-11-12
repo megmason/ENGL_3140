@@ -42,6 +42,7 @@ pre_test_data %>% ggplot(aes(x = factor(Age))) +
   geom_bar(fill = 'steelblue') +
   scale_y_continuous(breaks = seq(0, 5, by = 1)) +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(title = "Number of Users per Age Group",
        x = "Age Group",
        y = "Number of Users")
@@ -50,6 +51,7 @@ pre_test_data %>% ggplot(aes(x = factor(Age))) +
   geom_bar(fill = 'steelblue') +
   scale_y_continuous(breaks = seq(0, 5, by = 1)) +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(title = "Number of Users per Age Group",
        x = "Age Group",
        y = "Number of Users")
@@ -58,6 +60,7 @@ pre_test_data %>% ggplot(aes(x = factor(Browser))) +
   geom_bar(fill = 'steelblue') +
   scale_y_continuous(breaks = seq(0, 5, by = 1)) +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(title = "Number of Users per Web Browser",
        x = "Browser",
        y = "Number of Users")
@@ -74,6 +77,7 @@ time_of_task_data %>%
   geom_boxplot(fill = "steelblue") +
   coord_flip() +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(
     title = "Completion Time by Task",
     x = "Task",
@@ -92,28 +96,34 @@ num_pages_task_data %>%
   geom_boxplot(fill = "steelblue") +
   coord_flip() +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(
     title = "Number of Pages by Task",
     x = "Task",
     y = "Number of Pages"
   )
 
-ggplot(data=post_test_data_1, aes(x = stuckOrFrustration)) +
+ggplot(data=post_test_data_1, aes(x = fct_infreq(stuckOrFrustration))) +
   geom_bar(fill = 'steelblue') +
   scale_y_continuous(breaks = seq(0, 5, by = 1)) +
   theme_bw() +
+  theme(panel.grid = element_blank()) +
   labs(title = "Number of Users That Identified Tasks as Frustrating",
        x = "Task",
        y = "Number of Users")
 
 ggplot(data=number_of_dead_clicks, aes(x = Clicks)) +
-  geom_histogram(fill = 'steelblue') +
+  geom_bar(fill = 'steelblue') +
+  geom_text(stat = "count", 
+            aes(label = after_stat(count)), 
+            vjust = -0.5) +
   scale_y_continuous(breaks = seq(0, 20, by = 1)) +
   scale_x_continuous(breaks = seq(0, 10, by = 1)) +
   theme_bw() +
-  labs(title = "How Often Dead Clicks Occured",
-       x = "Number of Dead Clicks Per Task ",
-       y = "Number of occurances")
+  theme(panel.grid = element_blank()) +
+  labs(title = "How Often Dead Clicks Occured in One Task",
+       x = "Number of Dead Clicks In One Task ",
+       y = "Number of Tasks")
 
 
 
